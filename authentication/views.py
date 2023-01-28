@@ -4,6 +4,11 @@ from django.http import HttpRequest
 from django.contrib.auth.models import User
 from .forms import RegisterForm
 
+from django.contrib import messages
+from django.contrib.messages import constants
+
+from utils import Utils
+
 
 def register(request: HttpRequest):
     match request.method:
@@ -16,32 +21,59 @@ def register(request: HttpRequest):
             return render(request, 'cadastro.html')
 
         case 'POST':
-            form: RegisterForm = RegisterForm(request.POST)
-            if not form.is_valid():
-                print(form.errors)
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            confirm_password = request.POST.get('confirm_password')
+
+            if not Utils.validate_email(email):
+                messages.add_message(
+                    request,
+                    constants.WARNING,
+                    'Digite um e-mail válido!'
+                )
+
+            if not any([Utils.validate_password(password), Utils.validate_password(confirm_password)]):
+                messages.add_message(
+                    request, 
+                    constants.WARNING, 
+                    'É preciso que sua senha tenha no mínimo uma letra maiúscula, um número e um caractere especial.'
+                )
+
+                return redirect('/auth/register')
+
+            if not password == confirm_password:
+                messages.add_message(
+                    request, 
+                    constants.WARNING, 
+                    'As senhas não coincidem.'
+                )
 
                 return redirect('/auth/register')
 
             try:
-                _username, _email = User.objects.filter(username=form.data.get('username')), User.objects.filter(email=form.data.get('email'))
+                _username, _email = User.objects.filter(username=username), User.objects.filter(email=email)
 
                 if _username or _email:
                     # Levantar erro sobre usuário existente
+                    messages.add_message(request, constants.WARNING, 'Já existe um usuário com esse email ou nome de usuário cadastrado. Use outro!')
 
-                    ...
+                    return redirect('/auth/register')
 
                 User.objects.create_user(
-                    username=form.data.get('username'),
-                    email=form.data.get('email'),
-                    password=form.data.get('password')
+                    username=username,
+                    email=username,
+                    password=username
                 )
 
                 # Mostrar mensagem de sucesso
+                messages.add_message(request, constants.SUCCESS, 'Usuário cadastrado com sucesso!')
 
                 return redirect('/auth/login')
 
             except:
                 # Mostrar mensagem de erro no sistema
+                messages.add_message(request, constants.ERROR, 'Erro interno do sistema')
 
                 return redirect('/auth/register')
 

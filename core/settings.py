@@ -144,3 +144,10 @@ MESSAGE_TAGS = {
     constants.INFO: 'alert-info',
     constants.WARNING: 'alert-warning',
 }
+
+# Celery
+
+CELERY_TIMEZONE = 'America/Manaus'
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', cast=str)
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60

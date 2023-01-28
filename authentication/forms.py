@@ -25,18 +25,14 @@ class RegisterForm(forms.Form):
         if not any([Utils.validate_password(password), Utils.validate_password(confirm_password)]):
             self._errors.update(
                 {
-                    'password_typing': self.error_class([
-                        'É preciso que sua senha tenha no mínimo uma letra maiúscula, um número e um caractere especial.'
-                    ]) 
+                    'password_typing': 'É preciso que sua senha tenha no mínimo uma letra maiúscula, um número e um caractere especial.'
                 }
             )
 
         if not password == confirm_password:
             self._errors.update(
                 {
-                    'password_match': self.error_class([
-                        'As senhas não coincidem.'
-                    ])
+                    'password_match': 'As senhas não coincidem.'
                 }
             )
 

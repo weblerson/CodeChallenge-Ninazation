@@ -10,3 +10,13 @@ class Utils:
             return False
 
         return True
+
+    @staticmethod
+    def validate_email(email: str) -> bool:
+        regex = re.compile(
+            r'.+@.+\.[\.com\.br]+'
+        )
+        if not regex.match(email):
+            return False
+
+        return True

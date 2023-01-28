@@ -108,3 +108,9 @@ def login(request: HttpRequest):
             auth.login(request, user)
 
             return redirect('/home')
+
+
+def logout(request: HttpRequest):
+    auth.logout(request)
+
+    return redirect('/auth/login')

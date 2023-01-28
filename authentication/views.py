@@ -15,7 +15,7 @@ def register(request: HttpRequest):
             if request.user.is_authenticated:
                 # Redirecionar pra página principal
                 
-                return redirect('/avaliation')
+                return redirect('/home')
 
             return render(request, 'cadastro.html')
 
@@ -83,7 +83,7 @@ def login(request: HttpRequest):
             if request.user.is_authenticated:
                 # Redirecionar pra página principal
                 
-                return redirect('/avaliation')
+                return redirect('/home')
 
             return render(request, 'login.html')
 
@@ -107,4 +107,4 @@ def login(request: HttpRequest):
 
             auth.login(request, user)
 
-            return redirect('/avaliation')
+            return redirect('/home')

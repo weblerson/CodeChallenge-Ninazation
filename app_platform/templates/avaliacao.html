@@ -5,10 +5,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
+
     <h3>Avaliação</h3>
     <hr>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault">
+
+  <form method="POST" action="{% url 'avaliation' %}">
+    {% comment %} <div class="form-check">
+        <input class="form-check-input" value="P" type="radio" name="flexRadioDefault">
         <label class="form-check-label">Péssimo</label>
     </div>
     <br>
@@ -25,7 +28,15 @@
     <div class="form-check">
       <input class="form-check-input" type="radio" name="flexRadioDefault">
       <label class="form-check-label">Excelente</label>
-    </div>
+    </div> {% endcomment %}
+
+    <select class="form-select" name="status" aria-label="Default select example">
+      <option selected>Selecione sua avaliação</option>
+      <option value="P">Péssimo</option>
+      <option value="R">Ruim</option>
+      <option value="B">Bom</option>
+      <option value="E">Excelente</option>
+    </select>
     <br>
     <hr>
     <h3>Anotações</h3>
@@ -39,4 +50,5 @@
         <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px"></textarea>
         <label>Anotação negativa</label>
     </div>
+  </form>
 

@@ -2,9 +2,8 @@ from django.shortcuts import render, redirect
 from django.http import HttpRequest
 
 from django.contrib.auth.models import User
-from .forms import RegisterForm
 
-from django.contrib import messages
+from django.contrib import messages, auth
 from django.contrib.messages import constants
 
 from utils import Utils
@@ -16,7 +15,7 @@ def register(request: HttpRequest):
             if request.user.is_authenticated:
                 # Redirecionar pra página principal
                 
-                ...
+                return redirect('/avaliation')
 
             return render(request, 'cadastro.html')
 
@@ -62,8 +61,8 @@ def register(request: HttpRequest):
 
                 User.objects.create_user(
                     username=username,
-                    email=username,
-                    password=username
+                    email=email,
+                    password=password
                 )
 
                 # Mostrar mensagem de sucesso
@@ -79,4 +78,33 @@ def register(request: HttpRequest):
 
 
 def login(request: HttpRequest):
-    ...
+    match request.method:
+        case 'GET':
+            if request.user.is_authenticated:
+                # Redirecionar pra página principal
+                
+                return redirect('/avaliation')
+
+            return render(request, 'login.html')
+
+        case 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
+
+            if not Utils.validate_password(password):
+                messages.add_message(
+                    request, 
+                    constants.WARNING, 
+                    'É preciso que sua senha tenha no mínimo uma letra maiúscula, um número e um caractere especial.'
+                )
+
+                return redirect('/auth/login')
+
+            user = auth.authenticate(username=username, password=password)
+            if not user:
+                messages.add_message(request, constants.WARNING, "Usuário passado não existe! Verifique seu usuário ou senha.")
+                return redirect('/auth/login')
+
+            auth.login(request, user)
+
+            return redirect('/avaliation')

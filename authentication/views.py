@@ -18,6 +18,8 @@ def register(request: HttpRequest):
         case 'POST':
             form: RegisterForm = RegisterForm(request.POST)
             if not form.is_valid():
+                print(form.errors)
+
                 return redirect('/auth/register')
 
             try:

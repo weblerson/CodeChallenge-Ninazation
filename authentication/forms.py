@@ -5,8 +5,6 @@ from utils import Utils
 
 class RegisterForm(forms.Form):
     
-    username = forms.CharField()
-    email = forms.EmailField()
     password = forms.CharField(
         widget=forms.PasswordInput(),
         required=True,
@@ -24,7 +22,7 @@ class RegisterForm(forms.Form):
         password = self.cleaned_data.get('password')
         confirm_password = self.cleaned_data.get('confirm_password')
 
-        if not any(Utils.validate_password(password), Utils.validate_password(confirm_password)):
+        if not any([Utils.validate_password(password), Utils.validate_password(confirm_password)]):
             self._errors.update(
                 {
                     'password_typing': self.error_class([

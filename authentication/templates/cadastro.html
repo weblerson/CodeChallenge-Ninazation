@@ -7,19 +7,19 @@
 </head>
 <form method="POST" action="{% url 'register' %}">{% csrf_token %}
   <div class="form-group">
-    <label for="">Nome</label>
+    <label >Nome</label>
     <input type="text" class="form-control" name="username" aria-describedby="emailHelp" placeholder="Nome">
   </div>
   <div class="form-group">
-    <label for="exampleInputEmail1">E-mail</label>
+    <label >E-mail</label>
     <input type="email" class="form-control" name="email" aria-describedby="emailHelp" placeholder="E-mail">
   </div>
   <div class="form-group">
-    <label for="exampleInputPassword1">Senha</label>
+    <label>Senha</label>
     <input type="password" class="form-control" name="password" placeholder="Password">
   </div>
    <div class="form-group">
-    <label for="">Repita a senha</label>
+    <label>Repita a senha</label>
     <input type="password" class="form-control" name="confirm_password" placeholder="Password">
   </div>
   <br>

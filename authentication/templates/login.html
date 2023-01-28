@@ -6,17 +6,21 @@
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <form>
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">E-mail</label>
+  <div class="row mb-3">
+    <label class="col-md-5" align="right" for="exampleInputEmail1" class="form-label">E-mail</label>
+      <div class="col-md-3">
     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
   </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Senha</label>
+  <div class="row mb-3">
+    <label class="col-md-5" align="right" for="exampleInputPassword1" class="form-label">Senha</label>
+      <div class="col-md-3">
     <input type="password" class="form-control" id="exampleInputPassword1">
+      </div>
   </div>
-  <div class="mb-3 form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Lembre-me</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+    <div class="row mb-3">
+        <div class="col-md-1 offset-md-5" align="left">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </div>
 </form>

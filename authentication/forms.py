@@ -3,7 +3,7 @@ from django import forms
 from utils import Utils
 
 
-class RegisterForm(forms):
+class RegisterForm(forms.Form):
     
     username = forms.CharField()
     email = forms.EmailField()

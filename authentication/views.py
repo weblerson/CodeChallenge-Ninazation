@@ -28,7 +28,7 @@ def register(request: HttpRequest):
 
                     ...
 
-                user: User = User.objects.create_user(
+                User.objects.create_user(
                     username=form.data.get('username'),
                     email=form.data.get('email'),
                     password=form.data.get('password')
